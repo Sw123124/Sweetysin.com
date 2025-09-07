@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweetysin</title>
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/j5NbdkVz/unnamed-12.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+         :root {
+            --primary-color: #9DC887;
+            --primary-dark: #78A366;
+            --secondary-dark: #1E4620;
+            --bg-light: #F0FDF4;
+            --bg-panel: #fff;
+        }
+        
+        body {
+            font-family: 'Prompt', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-light);
+            color: #333;
+            line-height: 1.6;
+            transition: background-color 0.3s ease;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 0;
+            background-color: var(--primary-color);
+            border-bottom: 5px solid var(--primary-dark);
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .left-panel {
+            background-color: var(--bg-panel);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            flex: 1;
+            width: 100%;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+        /* Animation for section transition */
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .page-section.active {
+            display: block;
+            animation: fadeIn 0.8s ease-in-out forwards;
+        }
+        /* New style for prominent headers with a box/frame */
+        
+        .prominent-header {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: var(--secondary-dark);
+            margin-top: 0;
+            padding: 15px 20px;
+            background-color: #D8F5DB;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            display: block;
+        }
+        
+        .prominent-header:hover {
+            transform: translateY(-2px);
+        }
+        
+        .profile-section h2 {
+            font-size: 2em;
+            color: var(--secondary-dark);
+            margin-top: 0;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+        
+        .profile-section-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px;
+            background-color: #f7fcf9;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .profile-section-item:hover {
+            transform: scale(1.02);
+            background-color: #edf9f0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .profile-section-item p {
+            margin: 0;
+            font-size: 1.1em;
+            color: #444;
+        }
+        
+        .profile-section-item .highlight {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--secondary-dark);
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .product-card {
+            background-color: var(--bg-panel);
+            border-radius: 15px;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .product-card img {
+            width: 100%;
+            height: auto;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .product-card-content {
+            padding: 15px;
+        }
+        
+        .product-card-content h3 {
+            margin: 0;
+            font-size: 1.3em;
+            color: #444;
+        }
+        
+        .product-card-content p {
+            margin: 5px 0 0;
+            color: #777;
+        }
+        
+        .buy-button {
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            font-size: 1em;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            display: block;
+            margin: 10px auto;
+        }
+        
+        .buy-button:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+            background-color: var(--bg-panel);
+            border-top: 1px solid var(--primary-color);
+            border-radius: 15px 15px 0 0;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .footer-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-buttons button {
+            background-color: var(--primary-color);
+            color: #fff;
+            border: 1px solid var(--primary-dark);
+            padding: 15px;
+            font-size: 1.1em;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            flex: 1 1 200px;
+            max-width: 250px;
+        }
+        
+        .footer-buttons button:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .footer p {
+            font-size: 0.9em;
+            color: #888;
+        }
+        /* Modal styles */
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding-top: 60px;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .modal-buttons button,
+        .modal-buttons a {
+            padding: 15px;
+            font-size: 1.1em;
+            font-weight: 500;
+            color: #fff;
+            border: none;
+            text-decoration: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: block;
+            text-align: center;
+            background-color: var(--primary-color);
+        }
+        
+        .modal-buttons a {
+            background-color: var(--secondary-dark);
+        }
+        
+        .modal-buttons a:hover {
+            background-color: #3b5998;
+        }
+        
+        .contact-info {
+            text-align: left;
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+        
+        .contact-info p {
+            font-size: 0.9em;
+            color: #777;
+            margin: 5px 0;
+        }
+        
+        .qr-code-container {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .qr-code-image {
+            max-width: 150px;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        
+        .qr-code-container p {
+            font-weight: 500;
+            color: var(--secondary-dark);
+            margin: 0;
+        }
+        /* New section styles */
+        
+        .page-section {
+            display: none;
+        }
+        
+        .section-header {
+            font-size: 2em;
+            color: var(--secondary-dark);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-top: 0;
+            text-align: center;
+        }
+        
+        .large-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .rov-section {
+            text-align: center;
+        }
+        
+        .highlight-note {
+            background-color: #D8F5DB;
+            color: var(--secondary-dark);
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        /* The new review page style */
+        
+        .review-page-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .review-box {
+            background-color: var(--bg-panel);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        
+        .review-box a {
+            display: block;
+            background-color: var(--primary-color);
+            color: #fff;
+            border: 1px solid var(--primary-dark);
+            padding: 15px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+        
+        .review-box a:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .review-note {
+            font-size: 0.9em;
+            color: #777;
+            margin-top: 10px;
+        }
+        /* Style for the promotion text */
+        
+        .promotion-text {
+            font-size: 2em;
+            font-weight: bold;
+            color: var(--secondary-dark);
+            text-align: center;
+            margin-top: 50px;
+        }
+        /* --- Responsive design for smaller screens --- */
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            .left-panel {
+                padding: 20px;
+            }
+            .prominent-header,
+            .profile-section h2,
+            .section-header {
+                font-size: 1.5em;
+            }
+            .footer-buttons {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+            .footer-buttons button {
+                width: 45%;
+                max-width: 200px;
+            }
+            .modal-content {
+                width: 90%;
+            }
+            .promotion-text {
+                font-size: 1.5em;
+            }
+        }
+        /* Adjustments for very small screens (phones) */
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+            .left-panel {
+                padding: 15px;
+            }
+            .prominent-header,
+            .profile-section h2,
+            .section-header {
+                font-size: 1.3em;
+            }
+            .highlight-note {
+                font-size: 1em;
+            }
+            .footer-buttons button {
+                padding: 12px;
+                width: 100%;
+            }
+            .promotion-text {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <img src="https://i.postimg.cc/VLDKsz79/366-20250906164020.png" alt="Sweetysin Header">
+        </div>
+        <div class="main-content">
+            <!-- Home Section -->
+            <div id="home-section" class="left-panel page-section active">
+                <div class="profile-section">
+                    <h2>เกี่ยวกับเรา</h2>
+                    <div class="profile-section-item">
+                        <p>✅</p>
+                        <p>ร้าน <span class="highlight">Sweetysin</span></p>
+                    </div>
+                    <div class="profile-section-item">
+                        <p>⚡️</p>
+                        <p>ยอดขายรวมกว่า <span class="highlight">200+ ออเดอร์</span> ⚡️</p>
+                    </div>
+                    <div class="profile-section-item">
+                        <p>✨</p>
+                        <p>คำชี้แจงและข้อตกลง <span class="highlight">กรุณาอ่านก่อนซื้อทุกครั้งนะครับ</span> 🙏</p>
+                    </div>
+                    <div class="profile-section-item">
+                        <p>🕗</p>
+                        <p>เวลาเปิดให้บริการ <span class="highlight">ทุกวัน 08:10 - 23:10 น.</span></p>
+                    </div>
+                </div>
+                <!-- ROV Section with Centering -->
+                <div class="rov-section">
+                    <div class="prominent-header">สินค้า ROV รับเติมคูปอง</div>
+                    <div class="highlight-note">ใช้เพียงแค่ uid เท่านั้น</div>
+                    <img src="https://i.postimg.cc/sxf5bhCk/Kamaboko-56.png" alt="ROV Products" class="large-image">
+                    <button class="buy-button" onclick="openModal('buyModal')">ซื้อ</button>
+                </div>
+            </div>
+            <!-- Top-up Section -->
+            <div id="topup-section" class="left-panel page-section">
+                <div class="prominent-header">เติมเกม</div>
+                <div style="text-align: center; margin-top: 50px;">
+                    <img src="https://i.postimg.cc/nz5DP9zh/Gemini-Generated-Image-r6xncer6xncer6xn.png" alt="เติมเกมมือถือและอื่นๆ" class="large-image" style="margin-top: 20px;">
+                    <img src="https://i.postimg.cc/76hTzmWf/Kamaboko-57.png" alt="เติมเกมและเหรียญ Sweetysin" class="large-image" style="margin-top: 20px;">
+                    <img src="https://i.postimg.cc/SNd2Z0bJ/Kamaboko-56.png" alt="สินค้าเติมเกม Sweetysin" class="large-image" style="margin-top: 20px;">
+                    <button class="buy-button" onclick="openModal('buyModal')">ซื้อ</button>
+                </div>
+            </div>
+            <!-- Promotion Section -->
+            <div id="promo-section" class="left-panel page-section">
+                <h2 class="section-header">โปรโมชั่น</h2>
+                <p class="promotion-text">โปรโมชั่นจะมีทุกๆเทศกาล หรือ วันเกิดเจ้าของร้าน</p>
+            </div>
+            <!-- Review Section -->
+            <div id="review-section" class="left-panel page-section">
+                <h2 class="section-header">รีวิวของร้าน</h2>
+                <div class="review-page-content">
+                    <div class="review-box">
+                        <a href="https://www.facebook.com/photo?fbid=122233893518010664&set=a.122114434880010664" target="_blank">รีวิว1</a>
+                    </div>
+                    <div class="review-box">
+                        <a href="https://www.facebook.com/share/v/1AuYPkH6ck/" target="_blank">รีวิว2</a>
+                    </div>
+                    <div class="review-box">
+                        <a href="https://www.facebook.com/photo/?fbid=122301670346010664&set=a.122114434880010664" target="_blank">รีวิว3</a>
+                    </div>
+                </div>
+                <div class="review-note">
+                    <p>หมายเหตุ: เครดิตต่างๆ</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Section -->
+    <div class="footer">
+        <div class="footer-buttons">
+            <button onclick="showSection('home')">หน้าหลัก</button>
+            <button onclick="showSection('topup')">เติมเกมต่างๆ</button>
+            <button onclick="showSection('promo')">โปรโมชั่น</button>
+            <button onclick="showSection('review')">รีวิวของร้าน</button>
+            <button onclick="openModal('reportModal')">แจ้งปัญหา</button>
+        </div>
+        <p>@Sweetysin | สร้างขึ้นเมื่อ 6 กันยายน 2025 | อัปเดตล่าสุด 6 กันยายน 2025</p>
+    </div>
+    <!-- The Buy Modal -->
+    <div id="buyModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('buyModal')">&times;</span>
+            <h2 style="color: var(--secondary-dark);">ช่องทางการติดต่อ</h2>
+            <div class="modal-buttons">
+                <div class="qr-code-container">
+                    <p>สแกน QR Code เพื่อติดต่อ Line</p>
+                    <img src="https://i.postimg.cc/VLm7dHQz/line-oa-chat-680907-181150-group-0.png" alt="LINE QR Code" class="qr-code-image">
+                </div>
+            </div>
+            <div class="contact-info">
+                <p>หมายเหตุ:</p>
+                <p>การติดต่อผ่าน **Line** จะตอบกลับเร็วมาก</p>
+            </div>
+        </div>
+    </div>
+    <!-- The Report Modal -->
+    <div id="reportModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('reportModal')">&times;</span>
+            <h2 style="color: var(--secondary-dark);">แจ้งปัญหา</h2>
+            <div class="modal-buttons">
+                <a href="https://www.facebook.com/supakon.waisungnoen" target="_blank">ติดต่อ Facebook</a>
+                <div class="qr-code-container" style="margin-top: 10px;">
+                    <p>หรือสแกน QR Code เพื่อติดต่อ Line</p>
+                    <img src="https://i.postimg.cc/VLm7dHQz/line-oa-chat-680907-181150-group-0.png" alt="LINE QR Code" class="qr-code-image">
+                </div>
+            </div>
+            <div class="contact-info">
+                <p>กรุณาแจ้งรายละเอียดปัญหาและรหัสคำสั่งซื้อ (ถ้ามี) เพื่อการแก้ไขที่รวดเร็ว</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let initialSection = 'home'; // กำหนดหน้าเริ่มต้น
+            // Function to show a specific section and hide others with animation
+            window.showSection = (sectionId) => {
+                const sections = document.querySelectorAll('.page-section');
+                sections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                const targetSection = document.getElementById(sectionId + '-section');
+                if (targetSection) {
+                    targetSection.classList.add('active');
+                    initialSection = sectionId; // อัปเดตหน้าปัจจุบัน
+                }
+            };
+            // Set initial state to show the home section
+            showSection(initialSection);
+        });
+        // Function to open the buy modal
+        function openModal(modalId) {
+            var modal = document.getElementById(modalId);
+            modal.style.display = "block";
+        }
+
+        // Generic function to close any modal
+        function closeModal(modalId) {
+            var modal = document.getElementById(modalId);
+            modal.style.display = "none";
+        }
+        // Close modal if user clicks outside of it
+        window.onclick = function(event) {
+            var modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
